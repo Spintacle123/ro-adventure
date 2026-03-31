@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    create a sample blog post from the people. this can able to heart and comment to the public. create a sample content for title and description for the journey. blog post should be a sample of atleast 5 sample. with sample image, put a sample image and comment and heart reactions. 
+    create a sample blog post from the people. this can able to heart and comment to the public. create a sample content for title and description for the journey. blog post should be a sample of atleast 5 sample. with sample image, put a sample image and comment and heart reactions.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -9,7 +9,7 @@
     display: block;
     width: {{ block.settings.desktop_width_percent }}%;
     max-width: 100%;
-    padding: 40px 20px;
+    padding: 28px 20px 52px;
     background-color: {{ block.settings.background_color }};
   }
 
@@ -20,240 +20,392 @@
 
   .ai-journey-posts__header-{{ ai_gen_id }} {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .ai-journey-posts__title-{{ ai_gen_id }} {
     font-size: {{ block.settings.title_size }}px;
     color: {{ block.settings.title_color }};
     margin: 0 0 10px;
+    line-height: 1.15;
   }
 
   .ai-journey-posts__subtitle-{{ ai_gen_id }} {
     font-size: {{ block.settings.subtitle_size }}px;
     color: {{ block.settings.text_color }};
     margin: 0;
+    line-height: 1.6;
   }
 
   .ai-journey-posts__grid-{{ ai_gen_id }} {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
   }
 
   .ai-journey-post-{{ ai_gen_id }} {
     background-color: {{ block.settings.card_background }};
     border-radius: {{ block.settings.card_radius }}px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
   }
 
-  .ai-journey-post-{{ ai_gen_id }}:hover {
+  .ai-journey-post-{{ ai_gen_id }}:hover,
+  .ai-journey-post-{{ ai_gen_id }}:focus-visible {
     transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
   }
 
-  .ai-journey-post__image-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-    background-color: #f4f4f4;
-  }
-
-  .ai-journey-post__image-wrapper-{{ ai_gen_id }} img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ai-journey-post__image-wrapper-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ai-journey-post__content-{{ ai_gen_id }} {
-    padding: 20px;
-  }
-
-  .ai-journey-post__author-{{ ai_gen_id }} {
+  .ai-journey-post__header-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 15px;
+    padding: 12px 14px;
   }
 
   .ai-journey-post__avatar-{{ ai_gen_id }} {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
     background-color: {{ block.settings.accent_color }};
-    display: flex;
+    color: #ffffff;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
   }
 
-  .ai-journey-post__author-info-{{ ai_gen_id }} {
-    flex-grow: 1;
+  .ai-journey-post__author-wrap-{{ ai_gen_id }} {
+    min-width: 0;
   }
 
-  .ai-journey-post__author-name-{{ ai_gen_id }} {
-    font-weight: 600;
-    color: {{ block.settings.text_color }};
+  .ai-journey-post__author-{{ ai_gen_id }} {
     margin: 0;
-    font-size: 14px;
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   .ai-journey-post__date-{{ ai_gen_id }} {
+    margin: 0;
     font-size: 12px;
     color: {{ block.settings.meta_color }};
-    margin: 0;
+    line-height: 1.2;
   }
 
-  .ai-journey-post__title-{{ ai_gen_id }} {
-    font-size: 20px;
-    font-weight: 600;
-    color: {{ block.settings.text_color }};
-    margin: 0 0 10px;
+  .ai-journey-post__image-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #e9ece8;
   }
 
-  .ai-journey-post__description-{{ ai_gen_id }} {
-    font-size: 14px;
-    color: {{ block.settings.text_color }};
-    line-height: 1.6;
-    margin: 0 0 20px;
+  .ai-journey-post__image-{{ ai_gen_id }} img,
+  .ai-journey-post__image-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .ai-journey-post__body-{{ ai_gen_id }} {
+    padding: 12px 14px 14px;
   }
 
   .ai-journey-post__actions-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .ai-journey-post__action-list-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    align-items: center;
   }
 
   .ai-journey-post__action-btn-{{ ai_gen_id }} {
-    display: flex;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    gap: 6px;
     align-items: center;
-    gap: 8px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 20px;
-    transition: background-color 0.2s ease;
     color: {{ block.settings.meta_color }};
-    font-size: 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
   }
 
-  .ai-journey-post__action-btn-{{ ai_gen_id }}:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+  .ai-journey-post__action-btn-{{ ai_gen_id }} svg {
+    width: 18px;
+    height: 18px;
   }
 
   .ai-journey-post__action-btn-{{ ai_gen_id }}.liked {
     color: {{ block.settings.accent_color }};
   }
 
-  .ai-journey-post__action-icon-{{ ai_gen_id }} {
-    width: 20px;
-    height: 20px;
+  .ai-journey-post__title-{{ ai_gen_id }} {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    line-height: 1.35;
   }
 
-  .ai-journey-post__comments-{{ ai_gen_id }} {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  .ai-journey-post__caption-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .ai-journey-post__comments-{{ ai_gen_id }}.hidden {
+  .ai-journey-post__open-hint-{{ ai_gen_id }} {
+    display: inline-flex;
+    margin-top: 10px;
+    font-size: 12px;
+    color: {{ block.settings.meta_color }};
+  }
+
+  .ai-journey-modal-{{ ai_gen_id }} {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
     display: none;
+    background: rgba(18, 18, 18, 0.78);
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
   }
 
-  .ai-journey-post__comment-{{ ai_gen_id }} {
+  .ai-journey-modal-{{ ai_gen_id }}.active {
     display: flex;
+  }
+
+  .ai-journey-modal__panel-{{ ai_gen_id }} {
+    width: min(1100px, 100%);
+    max-height: calc(100vh - 40px);
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_radius }}px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .ai-journey-modal__media-{{ ai_gen_id }} {
+    background: #f2f3ef;
+    min-height: 360px;
+  }
+
+  .ai-journey-modal__media-{{ ai_gen_id }} img,
+  .ai-journey-modal__media-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-journey-modal__content-{{ ai_gen_id }} {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .ai-journey-modal__top-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+
+  .ai-journey-modal__meta-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: {{ block.settings.meta_color }};
+    font-size: 13px;
+  }
+
+  .ai-journey-modal__close-{{ ai_gen_id }} {
+    border: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: #f2f2f2;
+    color: {{ block.settings.text_color }};
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .ai-journey-modal__title-{{ ai_gen_id }} {
+    margin: 0 0 8px;
+    font-size: 24px;
+    line-height: 1.25;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-journey-modal__description-{{ ai_gen_id }} {
+    margin: 0 0 14px;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ai-journey-modal__actions-{{ ai_gen_id }} {
+    padding: 10px 0 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+  }
+
+  .ai-journey-modal__scroll-{{ ai_gen_id }} {
+    overflow: auto;
+    padding-right: 2px;
+  }
+
+  .ai-journey-modal__detail-{{ ai_gen_id }} {
+    margin: 0 0 14px;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .ai-journey-modal__comments-title-{{ ai_gen_id }} {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-journey-modal__comment-list-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 12px;
   }
 
-  .ai-journey-post__comment-avatar-{{ ai_gen_id }} {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: {{ block.settings.meta_color }};
+  .ai-journey-modal__comment-{{ ai_gen_id }} {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+    background: #ffffff;
+  }
+
+  .ai-journey-modal__comment-head-{{ ai_gen_id }} {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-
-  .ai-journey-post__comment-content-{{ ai_gen_id }} {
-    flex-grow: 1;
-  }
-
-  .ai-journey-post__comment-author-{{ ai_gen_id }} {
-    font-weight: 600;
-    font-size: 13px;
-    color: {{ block.settings.text_color }};
-    margin: 0 0 4px;
-  }
-
-  .ai-journey-post__comment-text-{{ ai_gen_id }} {
-    font-size: 13px;
-    color: {{ block.settings.text_color }};
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .ai-journey-post__comment-form-{{ ai_gen_id }} {
-    display: flex;
+    justify-content: space-between;
     gap: 8px;
-    margin-top: 10px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: {{ block.settings.meta_color }};
   }
 
-  .ai-journey-post__comment-input-{{ ai_gen_id }} {
-    flex-grow: 1;
-    padding: 8px 12px;
+  .ai-journey-modal__comment-name-{{ ai_gen_id }} {
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-journey-modal__comment-text-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-journey-modal__empty-{{ ai_gen_id }} {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: {{ block.settings.meta_color }};
+  }
+
+  .ai-journey-modal__form-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 8px;
+  }
+
+  .ai-journey-modal__input-{{ ai_gen_id }} {
+    width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 999px;
+    padding: 10px 12px;
     font-size: 13px;
-    outline: none;
+    background: #ffffff;
+    color: {{ block.settings.text_color }};
   }
 
-  .ai-journey-post__comment-input-{{ ai_gen_id }}:focus {
-    border-color: {{ block.settings.accent_color }};
-  }
-
-  .ai-journey-post__comment-submit-{{ ai_gen_id }} {
-    padding: 8px 16px;
-    background-color: {{ block.settings.accent_color }};
+  .ai-journey-modal__submit-{{ ai_gen_id }} {
+    border: 0;
+    border-radius: 999px;
+    background: {{ block.settings.accent_color }};
     color: #ffffff;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
     font-size: 13px;
-    font-weight: 600;
-    transition: opacity 0.2s ease;
+    font-weight: 700;
+    padding: 10px 14px;
+    cursor: pointer;
   }
 
-  .ai-journey-post__comment-submit-{{ ai_gen_id }}:hover {
-    opacity: 0.9;
-  }
-
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .ai-journey-posts__grid-{{ ai_gen_id }} {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .ai-journey-post__image-wrapper-{{ ai_gen_id }} {
-      height: 200px;
+    .ai-journey-modal__panel-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      max-height: calc(100vh - 24px);
+    }
+
+    .ai-journey-modal__media-{{ ai_gen_id }} {
+      max-height: 42vh;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-journey-posts-{{ ai_gen_id }} {
+      padding: 18px 12px 38px;
+    }
+
+    .ai-journey-posts__header-{{ ai_gen_id }} {
+      margin-bottom: 18px;
+    }
+
+    .ai-journey-posts__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .ai-journey-modal-{{ ai_gen_id }} {
+      padding: 8px;
+    }
+
+    .ai-journey-modal__content-{{ ai_gen_id }} {
+      padding: 14px;
+    }
+
+    .ai-journey-modal__title-{{ ai_gen_id }} {
+      font-size: 20px;
+    }
+
+    .ai-journey-modal__form-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
     }
   }
 {% endstyle %}
@@ -269,151 +421,249 @@
       </div>
     {% endif %}
 
-    <div class="ai-journey-posts__grid-{{ ai_gen_id }}">
-      {% assign posts = '
-        [
-          {
-            "author": "Sarah Mitchell",
-            "initials": "SM",
-            "date": "15 March 2026",
-            "title": "Summit Success at Ben Nevis",
-            "description": "After months of training, I finally reached the summit of Ben Nevis! The view from the top was absolutely breathtaking. The journey taught me that perseverance pays off.",
-            "image": "hero-apparel-1",
-            "likes": 127,
-            "isLiked": true,
-            "comments": [
-              {"author": "James", "initials": "J", "text": "Incredible achievement! How long did the climb take?"},
-              {"author": "Emma", "initials": "E", "text": "This is so inspiring! Adding this to my bucket list."},
-              {"author": "Oliver", "initials": "O", "text": "Well done! The weather looks perfect for it."}
-            ]
-          },
-          {
-            "author": "Marcus Chen",
-            "initials": "MC",
-            "date": "22 March 2026",
-            "title": "Coastal Trail Discovery",
-            "description": "Explored the stunning coastal trails of Cornwall this weekend. The combination of rugged cliffs and turquoise waters was magical. Perfect weather made it even better!",
-            "image": "collection-apparel-1",
-            "likes": 89,
-            "isLiked": false,
-            "comments": [
-              {"author": "Lucy", "initials": "L", "text": "Cornwall is beautiful! Which trail did you take?"},
-              {"author": "Daniel", "initials": "D", "text": "I love this area! Great photos."}
-            ]
-          },
-          {
-            "author": "Olivia Thompson",
-            "initials": "OT",
-            "date": "25 March 2026",
-            "title": "Wild Camping in the Highlands",
-            "description": "Spent three nights wild camping in the Scottish Highlands. Waking up to misty mountains and complete silence was a dream. This is what adventure is all about!",
-            "image": "detailed-apparel-1",
-            "likes": 156,
-            "isLiked": true,
-            "comments": [
-              {"author": "Tom", "initials": "T", "text": "Looks amazing! Any tips for first-time wild campers?"},
-              {"author": "Sophie", "initials": "S", "text": "The Highlands are on my list for this summer!"},
-              {"author": "Alex", "initials": "A", "text": "Stunning location! What gear did you bring?"}
-            ]
-          },
-          {
-            "author": "David Roberts",
-            "initials": "DR",
-            "date": "27 March 2026",
-            "title": "Mountain Biking Adventure",
-            "description": "Tackled some challenging mountain bike trails in Wales today. The adrenaline rush going downhill was incredible! Already planning my next ride.",
-            "image": "product-apparel-1",
-            "likes": 94,
-            "isLiked": false,
-            "comments": [
-              {"author": "Mike", "initials": "M", "text": "Which trails? Looking for new routes to try!"},
-              {"author": "Katie", "initials": "K", "text": "This looks intense! Stay safe out there."}
-            ]
-          },
-          {
-            "author": "Hannah Wilson",
-            "initials": "HW",
-            "date": "29 March 2026",
-            "title": "Kayaking the Lake District",
-            "description": "Spent the day kayaking across Windermere. The water was crystal clear and the surrounding mountains created the perfect backdrop. An unforgettable experience!",
-            "image": "blog-apparel-1",
-            "likes": 112,
-            "isLiked": true,
-            "comments": [
-              {"author": "Rachel", "initials": "R", "text": "This looks so peaceful! Did you rent or bring your own kayak?"},
-              {"author": "Chris", "initials": "C", "text": "The Lake District never disappoints!"},
-              {"author": "Megan", "initials": "M", "text": "Beautiful! I need to visit soon."}
-            ]
-          }
-        ]
-      ' | strip %}
+    {% assign posts = '
+      [
+        {
+          "author": "Sarah Mitchell",
+          "initials": "SM",
+          "date": "March 15, 2026",
+          "title": "Sunrise Push at Ben Nevis",
+          "description": "Chased sunrise to the summit and captured one of the clearest ridge views this season.",
+          "detail": "We started before 4:00 AM and moved steady through changing weather. The final ascent was icy, but the sky opened just as we reached the top. This trip reminded me that timing, patience, and a strong team make all the difference on hard routes.",
+          "image": "hero-apparel-1",
+          "likes": 127,
+          "isLiked": true,
+          "comments": [
+            {"author": "James", "text": "That sunrise shot is unreal.", "date": "Mar 16"},
+            {"author": "Emma", "text": "Adding this route to my list.", "date": "Mar 17"}
+          ]
+        },
+        {
+          "author": "Marcus Chen",
+          "initials": "MC",
+          "date": "March 18, 2026",
+          "title": "Cornwall Coastal Switchbacks",
+          "description": "Windy ridge line, rough terrain, and the bluest water I have seen this year.",
+          "detail": "The western trail had steep switchbacks and loose stone sections, so poles were essential. We paused often because the cliff views were too good to rush. If you do this route, start early and pack layers for quick weather swings.",
+          "image": "collection-apparel-1",
+          "likes": 93,
+          "isLiked": false,
+          "comments": [
+            {"author": "Lucy", "text": "Looks like a perfect weekend run.", "date": "Mar 19"}
+          ]
+        },
+        {
+          "author": "Olivia Thompson",
+          "initials": "OT",
+          "date": "March 20, 2026",
+          "title": "Highlands Wild Camp Setup",
+          "description": "Three nights off-grid with cold mornings, clear nights, and incredible silence.",
+          "detail": "Camped above the tree line with a low profile tent to handle wind exposure. The second night dropped below freezing, but the setup held and we woke up to a full valley cloud inversion. This is the kind of trip that resets your pace.",
+          "image": "detailed-apparel-1",
+          "likes": 156,
+          "isLiked": true,
+          "comments": [
+            {"author": "Tom", "text": "What sleeping bag rating did you use?", "date": "Mar 21"},
+            {"author": "Alex", "text": "Cloud inversion looks insane.", "date": "Mar 22"}
+          ]
+        },
+        {
+          "author": "David Roberts",
+          "initials": "DR",
+          "date": "March 22, 2026",
+          "title": "Welsh Trail Bike Session",
+          "description": "Fast descents, technical corners, and one very muddy finish line.",
+          "detail": "The upper section was mostly rock gardens and tight turns, so speed control mattered more than power. We rode three loops and adjusted tire pressure between runs to improve grip. Legs were cooked by the last descent.",
+          "image": "product-apparel-1",
+          "likes": 104,
+          "isLiked": false,
+          "comments": [
+            {"author": "Mike", "text": "Need the GPX for this route.", "date": "Mar 23"}
+          ]
+        },
+        {
+          "author": "Hannah Wilson",
+          "initials": "HW",
+          "date": "March 24, 2026",
+          "title": "Windermere Kayak Drift",
+          "description": "Glassy water before noon and mountain reflections all day.",
+          "detail": "Started from the north shore and kept close to the lee side to avoid crosswind in open water. The lake stayed calm for most of the route, which made photography easy. Ended with a short portage and hot coffee by sunset.",
+          "image": "blog-apparel-1",
+          "likes": 118,
+          "isLiked": true,
+          "comments": [
+            {"author": "Rachel", "text": "This color palette is beautiful.", "date": "Mar 24"},
+            {"author": "Chris", "text": "Morning water looked perfect.", "date": "Mar 25"}
+          ]
+        },
+        {
+          "author": "Priya Nair",
+          "initials": "PN",
+          "date": "March 25, 2026",
+          "title": "Forest Loop Recovery Hike",
+          "description": "Easy pace, long trail chat, and a lot of fern-lined paths.",
+          "detail": "After two intense weekends, we planned a recovery day with lighter packs and frequent breaks. The route stayed mostly shaded and had several stream crossings that kept it cool throughout the afternoon. Sometimes slower is exactly right.",
+          "image": "hero-apparel-1",
+          "likes": 79,
+          "isLiked": false,
+          "comments": [
+            {"author": "Nico", "text": "Need more low-intensity routes like this.", "date": "Mar 26"}
+          ]
+        },
+        {
+          "author": "Leo Grant",
+          "initials": "LG",
+          "date": "March 27, 2026",
+          "title": "Desert Ridge Overnight",
+          "description": "Dry wind, quiet camp, and the clearest night sky this month.",
+          "detail": "Navigation was straightforward in daylight, but we marked waypoints before dark for the return hike. Night temperature dropped quickly, so thermal layers were non-negotiable. We finished with sunrise photos along the ridgeline.",
+          "image": "collection-apparel-1",
+          "likes": 132,
+          "isLiked": false,
+          "comments": [
+            {"author": "Mia", "text": "That sky is unreal.", "date": "Mar 28"}
+          ]
+        },
+        {
+          "author": "Ivy Santos",
+          "initials": "IS",
+          "date": "March 29, 2026",
+          "title": "Waterfall Route Recon",
+          "description": "Scouted a wet, technical path with ladders and river stones.",
+          "detail": "The lower section was slippery, and the ladder climb near the falls required careful spacing between hikers. We used dry bags for camera gear and kept boots tight for traction. Worth it for the final viewpoint.",
+          "image": "detailed-apparel-1",
+          "likes": 147,
+          "isLiked": true,
+          "comments": [
+            {"author": "Sam", "text": "Great intel on the ladder section.", "date": "Mar 30"},
+            {"author": "Kai", "text": "Going here next weekend.", "date": "Mar 30"}
+          ]
+        },
+        {
+          "author": "Noah Park",
+          "initials": "NP",
+          "date": "March 30, 2026",
+          "title": "Camp Kitchen Test Day",
+          "description": "Ran a full cook setup test before our April multi-day trek.",
+          "detail": "We tested fuel efficiency, meal timing, and cookware cleanup with cold water only. The revised setup saved almost 400 grams versus last season while still handling two hot meals. Gear rehearsal days prevent a lot of trail problems.",
+          "image": "blog-apparel-1",
+          "likes": 88,
+          "isLiked": false,
+          "comments": [
+            {"author": "Jules", "text": "400g saved is huge.", "date": "Mar 30"}
+          ]
+        }
+      ]
+    ' | strip %}
 
-      {% assign posts_array = posts | parse_json %}
+    {% assign posts_array = posts | parse_json %}
 
+    <div class="ai-journey-posts__grid-{{ ai_gen_id }}" data-posts-grid>
       {% for post in posts_array %}
-        <article class="ai-journey-post-{{ ai_gen_id }}" data-post-id="{{ forloop.index }}">
-          <div class="ai-journey-post__image-wrapper-{{ ai_gen_id }}">
+        <article
+          class="ai-journey-post-{{ ai_gen_id }}"
+          data-post-card
+          data-post-index="{{ forloop.index0 }}"
+          tabindex="0"
+          role="button"
+          aria-label="Open blog details for {{ post.title }}"
+        >
+          <div class="ai-journey-post__header-{{ ai_gen_id }}">
+            <div class="ai-journey-post__avatar-{{ ai_gen_id }}">{{ post.initials }}</div>
+            <div class="ai-journey-post__author-wrap-{{ ai_gen_id }}">
+              <p class="ai-journey-post__author-{{ ai_gen_id }}">{{ post.author }}</p>
+              <p class="ai-journey-post__date-{{ ai_gen_id }}">{{ post.date }}</p>
+            </div>
+          </div>
+
+          <div class="ai-journey-post__image-{{ ai_gen_id }}" data-card-media>
             {{ post.image | placeholder_svg_tag }}
           </div>
 
-          <div class="ai-journey-post__content-{{ ai_gen_id }}">
-            <div class="ai-journey-post__author-{{ ai_gen_id }}">
-              <div class="ai-journey-post__avatar-{{ ai_gen_id }}">{{ post.initials }}</div>
-              <div class="ai-journey-post__author-info-{{ ai_gen_id }}">
-                <p class="ai-journey-post__author-name-{{ ai_gen_id }}">{{ post.author }}</p>
-                <p class="ai-journey-post__date-{{ ai_gen_id }}">{{ post.date }}</p>
+          <div class="ai-journey-post__body-{{ ai_gen_id }}">
+            <div class="ai-journey-post__actions-{{ ai_gen_id }}">
+              <div class="ai-journey-post__action-list-{{ ai_gen_id }}">
+                <button
+                  type="button"
+                  class="ai-journey-post__action-btn-{{ ai_gen_id }} {% if post.isLiked %}liked{% endif %}"
+                  data-like-btn
+                  data-post-index="{{ forloop.index0 }}"
+                  aria-label="Like {{ post.title }}"
+                  aria-pressed="{% if post.isLiked %}true{% else %}false{% endif %}"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                  <span data-like-count>{{ post.likes }}</span>
+                </button>
+
+                <span class="ai-journey-post__action-btn-{{ ai_gen_id }}" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span data-comment-count>{{ post.comments.size }}</span>
+                </span>
               </div>
             </div>
 
             <h3 class="ai-journey-post__title-{{ ai_gen_id }}">{{ post.title }}</h3>
-            <p class="ai-journey-post__description-{{ ai_gen_id }}">{{ post.description }}</p>
-
-            <div class="ai-journey-post__actions-{{ ai_gen_id }}">
-              <button 
-                class="ai-journey-post__action-btn-{{ ai_gen_id }} like-btn {% if post.isLiked %}liked{% endif %}" 
-                data-likes="{{ post.likes }}" 
-                aria-label="Like this post"
-                aria-pressed="{% if post.isLiked %}true{% else %}false{% endif %}"
-              >
-                <svg class="ai-journey-post__action-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" {% if post.isLiked %}fill="currentColor"{% else %}fill="none"{% endif %} stroke="currentColor" stroke-width="2">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-                <span class="like-count">{{ post.likes }}</span>
-              </button>
-
-              <button class="ai-journey-post__action-btn-{{ ai_gen_id }} comment-btn" aria-label="View comments" aria-expanded="false">
-                <svg class="ai-journey-post__action-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
-                <span class="comment-count">{{ post.comments.size }}</span>
-              </button>
-            </div>
-
-            <div class="ai-journey-post__comments-{{ ai_gen_id }} hidden">
-              {% for comment in post.comments %}
-                <div class="ai-journey-post__comment-{{ ai_gen_id }}">
-                  <div class="ai-journey-post__comment-avatar-{{ ai_gen_id }}">{{ comment.initials }}</div>
-                  <div class="ai-journey-post__comment-content-{{ ai_gen_id }}">
-                    <p class="ai-journey-post__comment-author-{{ ai_gen_id }}">{{ comment.author }}</p>
-                    <p class="ai-journey-post__comment-text-{{ ai_gen_id }}">{{ comment.text }}</p>
-                  </div>
-                </div>
-              {% endfor %}
-
-              <div class="ai-journey-post__comment-form-{{ ai_gen_id }}">
-                <input 
-                  type="text" 
-                  class="ai-journey-post__comment-input-{{ ai_gen_id }}" 
-                  placeholder="Add a comment..."
-                  aria-label="Add a comment"
-                >
-                <button class="ai-journey-post__comment-submit-{{ ai_gen_id }}" aria-label="Post comment">Post</button>
-              </div>
-            </div>
+            <p class="ai-journey-post__caption-{{ ai_gen_id }}">{{ post.description }}</p>
+            <span class="ai-journey-post__open-hint-{{ ai_gen_id }}">Tap to view full story</span>
           </div>
         </article>
       {% endfor %}
     </div>
+
+    <div class="ai-journey-modal-{{ ai_gen_id }}" data-post-modal aria-hidden="true">
+      <div class="ai-journey-modal__panel-{{ ai_gen_id }}" role="dialog" aria-modal="true" aria-label="Blog post details">
+        <div class="ai-journey-modal__media-{{ ai_gen_id }}" data-modal-media></div>
+
+        <div class="ai-journey-modal__content-{{ ai_gen_id }}">
+          <div class="ai-journey-modal__top-{{ ai_gen_id }}">
+            <div class="ai-journey-modal__meta-{{ ai_gen_id }}">
+              <strong data-modal-author></strong>
+              <span>•</span>
+              <span data-modal-date></span>
+            </div>
+            <button type="button" class="ai-journey-modal__close-{{ ai_gen_id }}" data-modal-close aria-label="Close details">&times;</button>
+          </div>
+
+          <h3 class="ai-journey-modal__title-{{ ai_gen_id }}" data-modal-title></h3>
+          <p class="ai-journey-modal__description-{{ ai_gen_id }}" data-modal-description></p>
+
+          <div class="ai-journey-modal__actions-{{ ai_gen_id }}">
+            <button type="button" class="ai-journey-post__action-btn-{{ ai_gen_id }}" data-modal-like-btn aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span data-modal-like-count>0</span>
+            </button>
+
+            <span class="ai-journey-post__action-btn-{{ ai_gen_id }}" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span data-modal-comment-count>0</span>
+            </span>
+          </div>
+
+          <div class="ai-journey-modal__scroll-{{ ai_gen_id }}">
+            <p class="ai-journey-modal__detail-{{ ai_gen_id }}" data-modal-detail></p>
+            <h4 class="ai-journey-modal__comments-title-{{ ai_gen_id }}">Comments</h4>
+            <div class="ai-journey-modal__comment-list-{{ ai_gen_id }}" data-modal-comments></div>
+            <p class="ai-journey-modal__empty-{{ ai_gen_id }}" data-modal-empty>No comments yet.</p>
+
+            <form class="ai-journey-modal__form-{{ ai_gen_id }}" data-modal-form>
+              <input type="text" class="ai-journey-modal__input-{{ ai_gen_id }}" data-comment-author placeholder="Your name" required>
+              <input type="text" class="ai-journey-modal__input-{{ ai_gen_id }}" data-comment-text placeholder="Write a comment" required>
+              <button type="submit" class="ai-journey-modal__submit-{{ ai_gen_id }}">Post</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="application/json" data-posts-json>{{ posts_array | json }}</script>
   </div>
 </journey-posts-{{ ai_gen_id }}>
 
@@ -422,105 +672,273 @@
     class JourneyPosts{{ ai_gen_id }} extends HTMLElement {
       constructor() {
         super();
+        this.posts = [];
+        this.activePostIndex = null;
+        this.storageKey = 'journey-posts-{{ ai_gen_id }}';
       }
 
       connectedCallback() {
-        this.setupLikeButtons();
-        this.setupCommentButtons();
-        this.setupCommentForms();
+        this.cacheElements();
+        this.loadPosts();
+        this.restoreState();
+        this.bindEvents();
+        this.renderCards();
       }
 
-      setupLikeButtons() {
-        const likeButtons = this.querySelectorAll('.like-btn');
-        
-        likeButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            const isLiked = this.classList.contains('liked');
-            const likeCountSpan = this.querySelector('.like-count');
-            let currentLikes = parseInt(likeCountSpan.textContent);
+      cacheElements() {
+        this.cards = Array.from(this.querySelectorAll('[data-post-card]'));
+        this.modal = this.querySelector('[data-post-modal]');
+        this.modalMedia = this.querySelector('[data-modal-media]');
+        this.modalAuthor = this.querySelector('[data-modal-author]');
+        this.modalDate = this.querySelector('[data-modal-date]');
+        this.modalTitle = this.querySelector('[data-modal-title]');
+        this.modalDescription = this.querySelector('[data-modal-description]');
+        this.modalDetail = this.querySelector('[data-modal-detail]');
+        this.modalLikeBtn = this.querySelector('[data-modal-like-btn]');
+        this.modalLikeCount = this.querySelector('[data-modal-like-count]');
+        this.modalCommentCount = this.querySelector('[data-modal-comment-count]');
+        this.modalComments = this.querySelector('[data-modal-comments]');
+        this.modalEmpty = this.querySelector('[data-modal-empty]');
+        this.modalForm = this.querySelector('[data-modal-form]');
+        this.modalCommentAuthor = this.querySelector('[data-comment-author]');
+        this.modalCommentText = this.querySelector('[data-comment-text]');
+      }
 
-            if (isLiked) {
-              this.classList.remove('liked');
-              currentLikes--;
-              const heartPath = this.querySelector('svg path');
-              heartPath.setAttribute('fill', 'none');
-              this.setAttribute('aria-pressed', 'false');
-            } else {
-              this.classList.add('liked');
-              currentLikes++;
-              const heartPath = this.querySelector('svg path');
-              heartPath.setAttribute('fill', 'currentColor');
-              this.setAttribute('aria-pressed', 'true');
-            }
+      loadPosts() {
+        const jsonEl = this.querySelector('[data-posts-json]');
+        if (!jsonEl) return;
 
-            likeCountSpan.textContent = currentLikes;
+        try {
+          this.posts = JSON.parse(jsonEl.textContent);
+        } catch (error) {
+          this.posts = [];
+        }
+      }
+
+      restoreState() {
+        try {
+          const stored = localStorage.getItem(this.storageKey);
+          if (!stored) return;
+
+          const parsed = JSON.parse(stored);
+          if (!Array.isArray(parsed)) return;
+
+          parsed.forEach((savedPost, index) => {
+            const post = this.posts[index];
+            if (!post) return;
+            post.likes = typeof savedPost.likes === 'number' ? savedPost.likes : post.likes;
+            post.isLiked = Boolean(savedPost.isLiked);
+            post.comments = Array.isArray(savedPost.comments) ? savedPost.comments : post.comments;
           });
+        } catch (error) {
+          localStorage.removeItem(this.storageKey);
+        }
+      }
+
+      saveState() {
+        try {
+          localStorage.setItem(this.storageKey, JSON.stringify(this.posts));
+        } catch (error) {
+          // Ignore storage failures.
+        }
+      }
+
+      bindEvents() {
+        this.cards.forEach((card) => {
+          const index = Number(card.dataset.postIndex);
+          const likeBtn = card.querySelector('[data-like-btn]');
+
+          if (likeBtn) {
+            likeBtn.addEventListener('click', (event) => {
+              event.stopPropagation();
+              this.toggleLike(index);
+            });
+          }
+
+          card.addEventListener('click', () => this.openModal(index));
+          card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              this.openModal(index);
+            }
+          });
+        });
+
+        const closeBtn = this.querySelector('[data-modal-close]');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => this.closeModal());
+        }
+
+        if (this.modal) {
+          this.modal.addEventListener('click', (event) => {
+            if (event.target === this.modal) {
+              this.closeModal();
+            }
+          });
+        }
+
+        this.modalLikeBtn.addEventListener('click', () => {
+          if (this.activePostIndex === null) return;
+          this.toggleLike(this.activePostIndex);
+        });
+
+        this.modalForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          this.addComment();
+        });
+
+        this.onEscape = (event) => {
+          if (event.key === 'Escape') {
+            this.closeModal();
+          }
+        };
+      }
+
+      toggleLike(index) {
+        const post = this.posts[index];
+        if (!post) return;
+
+        post.isLiked = !post.isLiked;
+        post.likes = post.isLiked ? post.likes + 1 : Math.max(0, post.likes - 1);
+
+        this.renderCards();
+        if (this.activePostIndex === index) {
+          this.renderModal(index);
+        }
+
+        this.saveState();
+      }
+
+      addComment() {
+        if (this.activePostIndex === null) return;
+
+        const post = this.posts[this.activePostIndex];
+        const author = this.modalCommentAuthor.value.trim();
+        const text = this.modalCommentText.value.trim();
+
+        if (!author || !text || !post) return;
+
+        post.comments.push({
+          author: author,
+          text: text,
+          date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+        });
+
+        this.modalCommentText.value = '';
+        this.renderCards();
+        this.renderModal(this.activePostIndex);
+        this.saveState();
+      }
+
+      openModal(index) {
+        this.activePostIndex = index;
+        this.renderModal(index);
+        this.modal.classList.add('active');
+        this.modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', this.onEscape);
+      }
+
+      closeModal() {
+        this.modal.classList.remove('active');
+        this.modal.setAttribute('aria-hidden', 'true');
+        this.activePostIndex = null;
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', this.onEscape);
+      }
+
+      renderCards() {
+        this.cards.forEach((card) => {
+          const index = Number(card.dataset.postIndex);
+          const post = this.posts[index];
+          if (!post) return;
+
+          const likeBtn = card.querySelector('[data-like-btn]');
+          const likeCount = card.querySelector('[data-like-count]');
+          const commentCount = card.querySelector('[data-comment-count]');
+
+          likeCount.textContent = post.likes;
+          commentCount.textContent = post.comments.length;
+
+          if (post.isLiked) {
+            likeBtn.classList.add('liked');
+            likeBtn.setAttribute('aria-pressed', 'true');
+          } else {
+            likeBtn.classList.remove('liked');
+            likeBtn.setAttribute('aria-pressed', 'false');
+          }
         });
       }
 
-      setupCommentButtons() {
-        const commentButtons = this.querySelectorAll('.comment-btn');
-        
-        commentButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            const post = this.closest('.ai-journey-post-{{ ai_gen_id }}');
-            const commentsSection = post.querySelector('.ai-journey-post__comments-{{ ai_gen_id }}');
-            
-            if (commentsSection.classList.contains('hidden')) {
-              commentsSection.classList.remove('hidden');
-              this.setAttribute('aria-expanded', 'true');
-            } else {
-              commentsSection.classList.add('hidden');
-              this.setAttribute('aria-expanded', 'false');
-            }
-          });
-        });
+      renderModal(index) {
+        const post = this.posts[index];
+        const card = this.cards[index];
+        if (!post || !card) return;
+
+        const media = card.querySelector('[data-card-media]');
+
+        this.modalMedia.innerHTML = media ? media.innerHTML : '';
+        this.modalAuthor.textContent = post.author;
+        this.modalDate.textContent = post.date;
+        this.modalTitle.textContent = post.title;
+        this.modalDescription.textContent = post.description;
+        this.modalDetail.textContent = post.detail;
+
+        this.modalLikeCount.textContent = post.likes;
+        this.modalCommentCount.textContent = post.comments.length;
+
+        if (post.isLiked) {
+          this.modalLikeBtn.classList.add('liked');
+          this.modalLikeBtn.setAttribute('aria-pressed', 'true');
+        } else {
+          this.modalLikeBtn.classList.remove('liked');
+          this.modalLikeBtn.setAttribute('aria-pressed', 'false');
+        }
+
+        this.renderModalComments(post.comments);
       }
 
-      setupCommentForms() {
-        const commentForms = this.querySelectorAll('.ai-journey-post__comment-form-{{ ai_gen_id }}');
-        
-        commentForms.forEach(form => {
-          const input = form.querySelector('.ai-journey-post__comment-input-{{ ai_gen_id }}');
-          const submitBtn = form.querySelector('.ai-journey-post__comment-submit-{{ ai_gen_id }}');
-          
-          submitBtn.addEventListener('click', function() {
-            const commentText = input.value.trim();
-            
-            if (commentText) {
-              const post = form.closest('.ai-journey-post-{{ ai_gen_id }}');
-              const commentsContainer = post.querySelector('.ai-journey-post__comments-{{ ai_gen_id }}');
-              const commentCountSpan = post.querySelector('.comment-count');
-              
-              const newComment = document.createElement('div');
-              newComment.className = 'ai-journey-post__comment-{{ ai_gen_id }}';
-              newComment.innerHTML = `
-                <div class="ai-journey-post__comment-avatar-{{ ai_gen_id }}">Y</div>
-                <div class="ai-journey-post__comment-content-{{ ai_gen_id }}">
-                  <p class="ai-journey-post__comment-author-{{ ai_gen_id }}">You</p>
-                  <p class="ai-journey-post__comment-text-{{ ai_gen_id }}">${commentText}</p>
-                </div>
-              `;
-              
-              commentsContainer.insertBefore(newComment, form);
-              
-              let currentCount = parseInt(commentCountSpan.textContent);
-              commentCountSpan.textContent = currentCount + 1;
-              
-              input.value = '';
-            }
-          });
-          
-          input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-              submitBtn.click();
-            }
-          });
+      renderModalComments(comments) {
+        this.modalComments.innerHTML = '';
+
+        if (!comments.length) {
+          this.modalEmpty.style.display = 'block';
+          return;
+        }
+
+        this.modalEmpty.style.display = 'none';
+
+        comments.forEach((comment) => {
+          const wrapper = document.createElement('article');
+          wrapper.className = 'ai-journey-modal__comment-{{ ai_gen_id }}';
+
+          const head = document.createElement('div');
+          head.className = 'ai-journey-modal__comment-head-{{ ai_gen_id }}';
+
+          const name = document.createElement('span');
+          name.className = 'ai-journey-modal__comment-name-{{ ai_gen_id }}';
+          name.textContent = comment.author || 'Guest';
+
+          const date = document.createElement('span');
+          date.textContent = comment.date || '';
+
+          head.appendChild(name);
+          head.appendChild(date);
+
+          const text = document.createElement('p');
+          text.className = 'ai-journey-modal__comment-text-{{ ai_gen_id }}';
+          text.textContent = comment.text || '';
+
+          wrapper.appendChild(head);
+          wrapper.appendChild(text);
+          this.modalComments.appendChild(wrapper);
         });
       }
     }
 
-    customElements.define('journey-posts-{{ ai_gen_id }}', JourneyPosts{{ ai_gen_id }});
+    if (!customElements.get('journey-posts-{{ ai_gen_id }}')) {
+      customElements.define('journey-posts-{{ ai_gen_id }}', JourneyPosts{{ ai_gen_id }});
+    }
   })();
 </script>
 
